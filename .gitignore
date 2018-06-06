@@ -1,0 +1,12 @@
+UserInterfaceState.xcuserstate
+Breakpoints_v2.xcbkptlist
+.DS_Store
+Pods
+
+DerivedData
+build
+
+*.swp
+
+*.lock
+IDEWorkspaceChecks.plist
