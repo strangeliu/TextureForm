@@ -11,7 +11,7 @@ import AsyncDisplayKit
 
 open class SwitchRow: RowCellNode, FormRowType {
     
-    let textNode = ASTextNode()
+    public let textNode = ASTextNode()
     let switchNode = ASDisplayNode { () -> UIView in
         return UISwitch()
     }
