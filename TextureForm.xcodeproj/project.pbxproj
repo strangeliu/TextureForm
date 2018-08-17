@@ -24,6 +24,7 @@
 		2B54D012207A14F900EA8FA9 /* ActionSheetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54D011207A14F900EA8FA9 /* ActionSheetRow.swift */; };
 		2B85701120316DC100378952 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85701020316DC100378952 /* Section.swift */; };
 		2BCB55CC205CEE4500E2442C /* Differ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCB55CB205CEE4500E2442C /* Differ+Extension.swift */; };
+		5A9C0EF021244F9B00E41AA4 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C0EEF21244F9B00E41AA4 /* OptionsViewController.swift */; };
 		B46307E1009E2468E6AC5641 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A24990952FF989205838F40 /* Pods_Example.framework */; };
 		D983C12B1ED30EDF7F7D1CED /* Pods_TextureForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB68F6F6D98236DF24AD6932 /* Pods_TextureForm.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		3A24990952FF989205838F40 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C0218D33AA703F61BF0799 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		56C0251C69ECB004A94EEAF5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		5A9C0EEF21244F9B00E41AA4 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		CE77204C32F2C2CBD0B0B11A /* Pods-TextureForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TextureForm/Pods-TextureForm.debug.xcconfig"; sourceTree = "<group>"; };
 		DB68F6F6D98236DF24AD6932 /* Pods_TextureForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAF34F1F098B4D08059DD121 /* Pods-TextureForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-TextureForm/Pods-TextureForm.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				2B85701020316DC100378952 /* Section.swift */,
 				2B05DBB1204534340020494B /* TitleHeaderView.swift */,
 				2B287D0E2030106600A92286 /* FormViewController.swift */,
+				5A9C0EEF21244F9B00E41AA4 /* OptionsViewController.swift */,
 				2BCB55CB205CEE4500E2442C /* Differ+Extension.swift */,
 			);
 			path = Source;
@@ -408,6 +411,7 @@
 				2B287D122030106600A92286 /* FormViewController.swift in Sources */,
 				2B287D112030106600A92286 /* TextRow.swift in Sources */,
 				2B287D132030106600A92286 /* MenuRow.swift in Sources */,
+				5A9C0EF021244F9B00E41AA4 /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
