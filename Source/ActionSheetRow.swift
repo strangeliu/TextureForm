@@ -71,6 +71,8 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
             return
         }
         let alertController = UIAlertController(title: nil, message: selectorTitle, preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 1, height: 1)
         for option in options {
             let action = UIAlertAction(title: option.description, style: .default) { [weak self] _ in
                 self?.didSelected(option: option)
