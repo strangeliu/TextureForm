@@ -22,6 +22,8 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
             } else {
                 descriptionNode.attributedText = nil
             }
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
