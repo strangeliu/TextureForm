@@ -12,7 +12,7 @@ import AsyncDisplayKit
 open class SwitchRow: RowCellNode, FormRowType {
     
     public let textNode = ASTextNode()
-    let switchNode = ASDisplayNode { () -> UIView in
+    public let switchNode = ASDisplayNode { () -> UIView in
         return UISwitch()
     }
     
