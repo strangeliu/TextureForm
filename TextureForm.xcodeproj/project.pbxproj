@@ -24,6 +24,7 @@
 		2B54D012207A14F900EA8FA9 /* ActionSheetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54D011207A14F900EA8FA9 /* ActionSheetRow.swift */; };
 		2B85701120316DC100378952 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85701020316DC100378952 /* Section.swift */; };
 		2BCB55CC205CEE4500E2442C /* Differ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCB55CB205CEE4500E2442C /* Differ+Extension.swift */; };
+		5A2665F121C78EDF00F08B21 /* WrapRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2665F021C78EDF00F08B21 /* WrapRow.swift */; };
 		5A9C0EF021244F9B00E41AA4 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C0EEF21244F9B00E41AA4 /* OptionsViewController.swift */; };
 		B46307E1009E2468E6AC5641 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A24990952FF989205838F40 /* Pods_Example.framework */; };
 		D983C12B1ED30EDF7F7D1CED /* Pods_TextureForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB68F6F6D98236DF24AD6932 /* Pods_TextureForm.framework */; };
@@ -76,6 +77,7 @@
 		3A24990952FF989205838F40 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C0218D33AA703F61BF0799 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		56C0251C69ECB004A94EEAF5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		5A2665F021C78EDF00F08B21 /* WrapRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapRow.swift; sourceTree = "<group>"; };
 		5A9C0EEF21244F9B00E41AA4 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		CE77204C32F2C2CBD0B0B11A /* Pods-TextureForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TextureForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TextureForm/Pods-TextureForm.debug.xcconfig"; sourceTree = "<group>"; };
 		DB68F6F6D98236DF24AD6932 /* Pods_TextureForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextureForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 				2B287D0F2030106600A92286 /* MenuRow.swift */,
 				2B54D011207A14F900EA8FA9 /* ActionSheetRow.swift */,
 				2B287D102030106600A92286 /* FormRow.swift */,
+				5A2665F021C78EDF00F08B21 /* WrapRow.swift */,
 				2B85701020316DC100378952 /* Section.swift */,
 				2B05DBB1204534340020494B /* TitleHeaderView.swift */,
 				2B287D0E2030106600A92286 /* FormViewController.swift */,
@@ -207,7 +210,6 @@
 				2B05DB9720452AED0020494B /* Resources */,
 				2B05DBAF20452B090020494B /* Embed Frameworks */,
 				E8084BD5AD48EBF56C49049A /* [CP] Embed Pods Frameworks */,
-				721C0B87B356CF73C7E2F068 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,7 +230,6 @@
 				2B287CF5202FF95800A92286 /* Frameworks */,
 				2B287CF6202FF95800A92286 /* Headers */,
 				2B287CF7202FF95800A92286 /* Resources */,
-				59377D9BA6D7CA7C80DDBB8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,7 +247,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = grace.app;
 				TargetAttributes = {
 					2B05DB9820452AED0020494B = {
@@ -255,7 +256,7 @@
 					};
 					2B287CF8202FF95800A92286 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -318,21 +319,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		59377D9BA6D7CA7C80DDBB8C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TextureForm/Pods-TextureForm-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63683F3BFD9DDCA6E3986B1E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,28 +337,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		721C0B87B356CF73C7E2F068 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E8084BD5AD48EBF56C49049A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 			);
@@ -383,7 +354,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -409,6 +380,7 @@
 				2B05DBB2204534340020494B /* TitleHeaderView.swift in Sources */,
 				2B287D142030106600A92286 /* FormRow.swift in Sources */,
 				2B287D122030106600A92286 /* FormViewController.swift in Sources */,
+				5A2665F121C78EDF00F08B21 /* WrapRow.swift in Sources */,
 				2B287D112030106600A92286 /* TextRow.swift in Sources */,
 				2B287D132030106600A92286 /* MenuRow.swift in Sources */,
 				5A9C0EF021244F9B00E41AA4 /* OptionsViewController.swift in Sources */,
@@ -491,6 +463,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -498,6 +471,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -551,6 +525,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -558,6 +533,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -608,7 +584,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -630,7 +606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = grace.app.TextureForm;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

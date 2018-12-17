@@ -37,7 +37,7 @@ open class SwitchRow: RowCellNode, FormRowType {
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         selectionStyle = .none
         
-        let attString = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)])
+        let attString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)])
         textNode.attributedText = attString
         
         addSubnode(textNode)

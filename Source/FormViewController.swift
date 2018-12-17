@@ -15,7 +15,7 @@ open class FormViewController: ASViewController<ASTableNode> {
     public var sections = [Section]()
     let tableNode: ASTableNode
     
-    public init(style: UITableViewStyle = .grouped) {
+    public init(style: UITableView.Style = .grouped) {
         tableNode = ASTableNode(style: style)
         super.init(node: tableNode)
         commonInit()

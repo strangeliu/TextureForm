@@ -27,13 +27,13 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
         }
     }
     
-    public var titleStyle: [NSAttributedStringKey: Any] = [.font : UIFont.systemFont(ofSize: 17)]
-    public var descriptionStyle: [NSAttributedStringKey: Any] = [.font : UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor(white: 0.5, alpha: 1)]
+    public var titleStyle: [NSAttributedString.Key: Any] = [.font : UIFont.systemFont(ofSize: 17)]
+    public var descriptionStyle: [NSAttributedString.Key: Any] = [.font : UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor(white: 0.5, alpha: 1)]
     
     public var valueDidChange: ((Option) -> Void)?
     
-    let textNode = ASTextNode()
-    let descriptionNode = ASTextNode()
+    public let textNode = ASTextNode()
+    public let descriptionNode = ASTextNode()
     
     let options: [Option]
     
