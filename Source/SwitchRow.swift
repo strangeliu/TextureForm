@@ -38,7 +38,7 @@ open class SwitchRow: RowCellNode, FormRowType {
         selectionStyle = .none
         textNode.style.flexShrink = 1
         
-        let attString = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)])
+        let attString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)])
         textNode.attributedText = attString
         
         addSubnode(textNode)

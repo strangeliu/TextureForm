@@ -14,12 +14,12 @@ open class TextRow: RowCellNode, FormRowType {
     let textNode = ASTextNode()
     let descriptionNode = ASTextNode()
     
-    public var titleStyle: [NSAttributedStringKey: Any] = [.font : UIFont.systemFont(ofSize: 17)] {
+    public var titleStyle: [NSAttributedString.Key: Any] = [.font : UIFont.systemFont(ofSize: 17)] {
         didSet {
             updateTitle()
         }
     }
-    public var descriptionStyle: [NSAttributedStringKey: Any] = [.font : UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor(white: 0.5, alpha: 1)]
+    public var descriptionStyle: [NSAttributedString.Key: Any] = [.font : UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor(white: 0.5, alpha: 1)]
     
     public var text: String {
         didSet {

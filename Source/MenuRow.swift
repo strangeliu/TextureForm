@@ -20,7 +20,7 @@ open class MenuRow: RowCellNode, FormRowType {
         addSubnode(imageNode)
         addSubnode(textNode)
         
-        let attString = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)])
+        let attString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)])
         textNode.attributedText = attString
         imageNode.image = image
         
@@ -28,7 +28,7 @@ open class MenuRow: RowCellNode, FormRowType {
     }
     
     public func update(text: String) {
-        textNode.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)])
+        textNode.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)])
     }
     
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
