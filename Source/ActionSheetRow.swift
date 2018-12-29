@@ -32,7 +32,7 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
     
     public var valueDidChange: ((Option) -> Void)?
     
-    let textNode = ASTextNode()
+    public let textNode = ASTextNode()
     let descriptionNode = ASTextNode()
     
     let options: [Option]
@@ -58,6 +58,7 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
     
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         descriptionNode.style.flexShrink = 1
+        textNode.style.flexShrink = 1
         let flex = ASStackLayoutSpec()
         flex.style.flexGrow = 1
         let stack = ASStackLayoutSpec.horizontal()
@@ -65,7 +66,8 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
         stack.spacing = 15
         stack.children = [textNode, flex, descriptionNode]
         let rightEdge: CGFloat = accessoryType == .none ? 20 : 0
-        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 20, left: 15, bottom: 20, right: rightEdge), child: stack)
+        let insets = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: rightEdge)
+        return ASInsetLayoutSpec(insets: insets, child: stack)
     }
     
     private func didSelected() {
