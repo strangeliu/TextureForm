@@ -12,8 +12,8 @@ import AsyncDisplayKit
 open class WrapRow<NodeType: ASDisplayNode>: RowCellNode, FormRowType {
     
     public let contentNode: NodeType
-    public let insets: UIEdgeInsets
     public let descriptionNode = ASTextNode()
+    public let insets: UIEdgeInsets
     
     public init(contentNode: NodeType, insets: UIEdgeInsets) {
         self.contentNode = contentNode

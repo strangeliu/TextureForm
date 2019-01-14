@@ -36,6 +36,7 @@ open class SwitchRow: RowCellNode, FormRowType {
         super.init()
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         selectionStyle = .none
+        textNode.style.flexShrink = 1
         
         let attString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)])
         textNode.attributedText = attString

@@ -23,8 +23,10 @@ open class OptionsViewController<Option: OptionType>: FormViewController {
     public init(options: [Option], selected: Option? = nil) {
         self.options = options
         self.selectedOption = selected
-        let optionRows = options.map({ option in
-            return TextRow(title: option.description)
+        let optionRows = options.map({ option -> TextRow in
+            let row = TextRow(title: option.description)
+            row.accessoryType = option == selected ? .checkmark : .none
+            return row
         })
         self.optionRows = optionRows
         super.init()

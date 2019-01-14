@@ -40,6 +40,7 @@ open class TextRow: RowCellNode, FormRowType {
     public init(title: String) {
         self.text = title
         super.init()
+        
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         updateTitle()
         
@@ -53,6 +54,7 @@ open class TextRow: RowCellNode, FormRowType {
     
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         descriptionNode.style.flexShrink = 1
+        textNode.style.flexShrink = 1
         let flex = ASStackLayoutSpec()
         flex.style.flexGrow = 1
         let stack = ASStackLayoutSpec.horizontal()
@@ -60,7 +62,8 @@ open class TextRow: RowCellNode, FormRowType {
         stack.spacing = 15
         stack.children = [textNode, flex, descriptionNode]
         let rightEdge: CGFloat = accessoryType == .none ? 20 : 0
-        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 20, left: 15, bottom: 20, right: rightEdge), child: stack)
+        let insets = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: rightEdge)
+        return ASInsetLayoutSpec(insets: insets, child: stack)
     }
     
 }
