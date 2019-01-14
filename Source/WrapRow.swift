@@ -11,18 +11,20 @@ import AsyncDisplayKit
 
 open class WrapRow<NodeType: ASDisplayNode>: RowCellNode, FormRowType {
     
-    let contentNode: NodeType
-    let descriptionNode = ASTextNode()
+    public let contentNode: NodeType
+    public let insets: UIEdgeInsets
+    public let descriptionNode = ASTextNode()
     
-    public init(contentNode: NodeType) {
+    public init(contentNode: NodeType, insets: UIEdgeInsets) {
         self.contentNode = contentNode
+        self.insets = insets
         super.init()
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         addSubnode(contentNode)
     }
     
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        return ASWrapperLayoutSpec(layoutElement: contentNode)
+        return ASInsetLayoutSpec(insets: insets, child: contentNode)
     }
     
 }
