@@ -13,7 +13,7 @@ public typealias Row = RowCellNode & FormRowType
 
 public protocol FormRowType {
     
-    var actions: [UITableViewRowAction]? { get }
+    var editActions: [UITableViewRowAction]? { get }
     
     var tag: String? { get }
 }
@@ -25,7 +25,7 @@ public protocol PresenterRowType {
 
 extension FormRowType {
     
-    public var actions: [UITableViewRowAction]? {
+    public var editActions: [UITableViewRowAction]? {
         return nil
     }
     

@@ -140,11 +140,11 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let row = sections[indexPath]
-        return row.actions != nil && row.actions?.count != 0
+        return row.editActions != nil && row.editActions?.count != 0
     }
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return sections[indexPath].actions
+        return sections[indexPath].editActions
     }
     
 }
