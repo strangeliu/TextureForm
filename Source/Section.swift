@@ -58,13 +58,6 @@ extension Section: Collection {
     
 }
 
-extension String: Differentiable {
-    
-    public var differenceIdentifier: String {
-        return self
-    }
-}
-
 extension Section: DifferentiableSection {
     
     public init<C>(source: Section, elements: C) where C : Collection, C.Element == Row {

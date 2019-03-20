@@ -21,9 +21,7 @@ open class RowCellNode: ASCellNode {
     
     let tag: String
     
-    public var editActions: [UITableViewRowAction]? {
-        return nil
-    }
+    public var editActions: [UITableViewRowAction]?
     
     public var onSelected: ((Row) -> Void)?
     

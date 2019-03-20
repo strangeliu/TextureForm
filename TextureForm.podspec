@@ -12,6 +12,6 @@ Pod::Spec.new do |spec|
   spec.public_header_files  = 'Source/*.h'
   spec.source_files = 'Source/*.{h,m,swift}'
   spec.dependency 'Texture/Core', '~> 2.6'
-  spec.dependency 'Differ'
+  spec.dependency 'DifferenceKit'
 
 end
