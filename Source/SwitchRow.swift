@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-open class SwitchRow: RowCellNode, FormRowType {
+open class SwitchRow: RowCellNode {
     
     public let textNode = ASTextNode()
     public let switchNode = ASDisplayNode { () -> UIView in

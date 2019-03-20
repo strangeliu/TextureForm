@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-open class TextRow: RowCellNode, FormRowType {
+open class TextRow: RowCellNode {
     
     let textNode = ASTextNode()
     let descriptionNode = ASTextNode()

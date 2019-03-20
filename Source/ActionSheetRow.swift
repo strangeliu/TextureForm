@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellNode, FormRowType, PresenterRowType {
+open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellNode, PresenterRowType {
     
     public weak var formViewController: FormViewController?
     

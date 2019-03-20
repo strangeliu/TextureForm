@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 use_frameworks!
 
@@ -9,7 +9,7 @@ project 'TextureForm.xcodeproj'
 
 target 'TextureForm' do
 	pod 'Texture/Core'
-	pod 'Differ'
+	pod 'DifferenceKit'
 end
 
 target 'Example' do

@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-open class WrapRow<NodeType: ASDisplayNode>: RowCellNode, FormRowType {
+open class WrapRow<NodeType: ASDisplayNode>: RowCellNode {
     
     public let contentNode: NodeType
     public let descriptionNode = ASTextNode()

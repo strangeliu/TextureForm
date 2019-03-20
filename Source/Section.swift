@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DifferenceKit
 
 public struct Section {
     
@@ -16,7 +17,7 @@ public struct Section {
     public var headerHeight: CGFloat?
     public var tag: String
     
-    public init(title: String? = nil, rows: [Row], tag: String = UUID().uuidString) {
+    public init(tag: String = UUID().uuidString, title: String? = nil, rows: [Row]) {
         self.title = title
         self.rows = rows
         self.tag = tag
@@ -53,6 +54,38 @@ extension Section: Collection {
     
     public subscript(position: Int) -> Row {
         return rows[position]
+    }
+    
+}
+
+extension String: Differentiable {
+    
+    public var differenceIdentifier: String {
+        return self
+    }
+}
+
+extension Section: DifferentiableSection {
+    
+    public init<C>(source: Section, elements: C) where C : Collection, C.Element == Row {
+        self.init(model: source.tag, elements: Array(elements))
+    }
+    
+    public var elements: [Row] {
+        return rows
+    }
+
+    public init(model: String, elements: [Row]) {
+        self.tag = model
+        self.rows = elements
+    }
+    
+    public var differenceIdentifier: String {
+        return tag
+    }
+    
+    public func isContentEqual(to source: Section) -> Bool {
+        return true
     }
     
 }

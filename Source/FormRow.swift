@@ -8,40 +8,39 @@
 
 import Foundation
 import AsyncDisplayKit
+import DifferenceKit
 
-public typealias Row = RowCellNode & FormRowType
-
-public protocol FormRowType {
-    
-    var editActions: [UITableViewRowAction]? { get }
-    
-    var tag: String? { get }
-}
+public typealias Row = RowCellNode
 
 public protocol PresenterRowType {
     
     var formViewController: FormViewController? { get set }
 }
 
-extension FormRowType {
+open class RowCellNode: ASCellNode {
+    
+    let tag: String
     
     public var editActions: [UITableViewRowAction]? {
         return nil
     }
     
-    public var tag: String? {
-        return nil
-    }
-}
-
-open class RowCellNode: ASCellNode {
-    
     public var onSelected: ((Row) -> Void)?
     
-    public override init() {
+    public init(tag: String = UUID().uuidString) {
+        self.tag = tag
         super.init()
         backgroundColor = UIColor.white
     }
+}
+
+extension RowCellNode: Differentiable {
     
+    public var differenceIdentifier: String {
+        return tag
+    }
     
+    public func isContentEqual(to source: RowCellNode) -> Bool {
+        return true
+    }
 }

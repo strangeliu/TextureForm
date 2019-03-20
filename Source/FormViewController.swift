@@ -8,7 +8,7 @@
 
 import Foundation
 import AsyncDisplayKit
-import Differ
+import DifferenceKit
 
 open class FormViewController: ASViewController<ASTableNode> {
     
@@ -38,14 +38,14 @@ open class FormViewController: ASViewController<ASTableNode> {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        reload(force: true)
+        rebuildForm(force: true)
     }
     
     private func tableViewDidLoad() {
         node.view.tableFooterView = UIView()
     }
     
-    open func reload(force: Bool) {
+    open func rebuildForm(force: Bool) {
         reload(to: buildForm(), force: force)
     }
     
@@ -65,10 +65,10 @@ open class FormViewController: ASViewController<ASTableNode> {
         if force {
             node.reloadData()
         } else {
-            let changes = oldSections.nestedExtendedDiff(to: sections, isEqualElement: { (l, r) -> Bool in
-                return l == r
-            })
-            tableNode.apply(changes)
+            let changeSet = StagedChangeset(source: oldSections, target: sections)
+            tableNode.reload(using: changeSet, interrupt: nil, setData: { sections in
+                self.sections = sections
+            }, reloadRow: nil)
         }
     }
     

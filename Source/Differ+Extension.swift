@@ -8,72 +8,115 @@
 
 import Foundation
 import AsyncDisplayKit
-import Differ
-
-public struct NestedBatchUpdate {
-    let itemDeletions: [IndexPath]
-    let itemInsertions: [IndexPath]
-    let itemMoves: [(from: IndexPath, to: IndexPath)]
-    let sectionDeletions: IndexSet
-    let sectionInsertions: IndexSet
-    let sectionMoves: [(from: Int, to: Int)]
-    
-    init(
-        diff: NestedExtendedDiff,
-        indexPathTransform: (IndexPath) -> IndexPath = { $0 },
-        sectionTransform: (Int) -> Int = { $0 }
-        ) {
-        
-        var itemDeletions: [IndexPath] = []
-        var itemInsertions: [IndexPath] = []
-        var itemMoves: [(IndexPath, IndexPath)] = []
-        var sectionDeletions: IndexSet = []
-        var sectionInsertions: IndexSet = []
-        var sectionMoves: [(from: Int, to: Int)] = []
-        
-        diff.forEach { element in
-            switch element {
-            case let .deleteElement(at, section):
-                itemDeletions.append(indexPathTransform(IndexPath(item: at, section: section)))
-            case let .insertElement(at, section):
-                itemInsertions.append(indexPathTransform(IndexPath(item: at, section: section)))
-            case let .moveElement(from, to):
-                itemMoves.append((indexPathTransform(IndexPath(item: from.item, section: from.section)), indexPathTransform(IndexPath(item: to.item, section: to.section))))
-            case let .deleteSection(at):
-                sectionDeletions.insert(sectionTransform(at))
-            case let .insertSection(at):
-                sectionInsertions.insert(sectionTransform(at))
-            case let .moveSection(move):
-                sectionMoves.append((sectionTransform(move.from), sectionTransform(move.to)))
-            }
-        }
-        
-        self.itemInsertions = itemInsertions
-        self.itemDeletions = itemDeletions
-        self.itemMoves = itemMoves
-        self.sectionMoves = sectionMoves
-        self.sectionInsertions = sectionInsertions
-        self.sectionDeletions = sectionDeletions
-    }
-}
+import DifferenceKit
 
 extension ASTableNode {
     
-    public func apply(
-        _ diff: NestedExtendedDiff,
-        indexPathTransform: @escaping (IndexPath) -> IndexPath = { $0 },
-        sectionTransform: @escaping (Int) -> Int = { $0 },
-        completion: ((Bool) -> Void)? = nil
-        ) {
-        performBatchUpdates({
-            let update = NestedBatchUpdate(diff: diff, indexPathTransform: indexPathTransform, sectionTransform: sectionTransform)
-            self.insertSections(update.sectionInsertions, with: .automatic)
-            self.deleteSections(update.sectionDeletions, with: .automatic)
-            update.sectionMoves.forEach { self.moveSection($0.from, toSection: $0.to) }
-            self.deleteRows(at: update.itemDeletions, with: .automatic)
-            self.insertRows(at: update.itemInsertions, with: .automatic)
-            update.itemMoves.forEach { self.moveRow(at: $0.from, to: $0.to) }
-        }, completion: completion)
+    public func reload<Model>(using stagedChangeset: StagedChangeset<[Model]>, interrupt: ((Changeset<[Model]>) -> Bool)? = nil, setData: ([Model]) -> Void, reloadRow: ((ASTableNode, IndexPath, Model) -> Void)? = nil) {
+        if case .none = view.window, let data = stagedChangeset.last?.data {
+            setData(data)
+            return reloadData()
+        }
+        
+        for changeset in stagedChangeset {
+            if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
+                setData(data)
+                return reloadData()
+            }
+            setData(changeset.data)
+            performBatchUpdates({ [weak self] in
+                guard let `self` = self else { return }
+                if !changeset.sectionDeleted.isEmpty {
+                    deleteSections(IndexSet(changeset.sectionDeleted), with: .automatic)
+                }
+                
+                if !changeset.sectionInserted.isEmpty {
+                    insertSections(IndexSet(changeset.sectionInserted), with: .automatic)
+                }
+                
+                if !changeset.sectionUpdated.isEmpty {
+                    reloadSections(IndexSet(changeset.sectionUpdated), with: .automatic)
+                }
+                
+                for (source, target) in changeset.sectionMoved {
+                    moveSection(source, toSection: target)
+                }
+                
+                if !changeset.elementDeleted.isEmpty {
+                    deleteRows(at: changeset.elementDeleted.map { IndexPath(row: $0.element, section: $0.section) }, with: .automatic)
+                }
+                
+                if !changeset.elementInserted.isEmpty {
+                    insertRows(at: changeset.elementInserted.map { IndexPath(row: $0.element, section: $0.section) }, with: .automatic)
+                }
+                
+                if !changeset.elementUpdated.isEmpty {
+                    changeset.elementUpdated.forEach({
+                        let indexPath = IndexPath(row: $0.element, section: $0.section)
+                        reloadRow?(self, indexPath, changeset.data[$0.element])
+                    })
+                }
+                
+                for (source, target) in changeset.elementMoved {
+                    moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
+                }
+            }) { _ in
+                
+            }
+        }
+    }
+    
+    public func reloadSections<DifferentiableSectionType: DifferentiableSection>(using stagedChangeset: StagedChangeset<[DifferentiableSectionType]>, interrupt: ((Changeset<[DifferentiableSectionType]>) -> Bool)? = nil, setData: ([DifferentiableSectionType]) -> Void, reloadRow: ((ASTableNode, IndexPath) -> Void)? = nil) where DifferentiableSectionType.Collection.Index == Int {
+        if case .none = view.window, let data = stagedChangeset.last?.data {
+            setData(data)
+            return reloadData()
+        }
+        
+        for changeset in stagedChangeset {
+            if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
+                setData(data)
+                return reloadData()
+            }
+            setData(changeset.data)
+            performBatchUpdates({ [weak self] in
+                guard let `self` = self else { return }
+                if !changeset.sectionDeleted.isEmpty {
+                    deleteSections(IndexSet(changeset.sectionDeleted), with: .automatic)
+                }
+                
+                if !changeset.sectionInserted.isEmpty {
+                    insertSections(IndexSet(changeset.sectionInserted), with: .automatic)
+                }
+                
+                if !changeset.sectionUpdated.isEmpty {
+                    reloadSections(IndexSet(changeset.sectionUpdated), with: .automatic)
+                }
+                
+                for (source, target) in changeset.sectionMoved {
+                    moveSection(source, toSection: target)
+                }
+                
+                if !changeset.elementDeleted.isEmpty {
+                    deleteRows(at: changeset.elementDeleted.map { IndexPath(row: $0.element, section: $0.section) }, with: .automatic)
+                }
+                
+                if !changeset.elementInserted.isEmpty {
+                    insertRows(at: changeset.elementInserted.map { IndexPath(row: $0.element, section: $0.section) }, with: .automatic)
+                }
+                
+                if !changeset.elementUpdated.isEmpty {
+                    changeset.elementUpdated.forEach({
+                        let indexPath = IndexPath(row: $0.element, section: $0.section)
+                        reloadRow?(self, indexPath)
+                    })
+                }
+                
+                for (source, target) in changeset.elementMoved {
+                    moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
+                }
+            }) { _ in
+                
+            }
+        }
     }
 }
-
