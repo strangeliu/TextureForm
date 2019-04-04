@@ -10,20 +10,20 @@ import Foundation
 import AsyncDisplayKit
 import DifferenceKit
 
-open class FormViewController: ASViewController<ASTableNode> {
+open class FormViewController: ASViewController<ASDisplayNode> {
     
     public var sections = [Section]()
-    let tableNode: ASTableNode
+    public let tableNode: ASTableNode
     
     public init(style: UITableView.Style = .grouped) {
         tableNode = ASTableNode(style: style)
-        super.init(node: tableNode)
+        super.init(node: ASDisplayNode())
         commonInit()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         tableNode = ASTableNode(style: .grouped)
-        super.init(node: tableNode)
+        super.init(node: ASDisplayNode())
         commonInit()
     }
     
@@ -32,17 +32,24 @@ open class FormViewController: ASViewController<ASTableNode> {
         tableNode.onDidLoad { [weak self] _ in
             self?.tableViewDidLoad()
         }
-        node.delegate = self
-        node.dataSource = self
+        tableNode.delegate = self
+        tableNode.dataSource = self
     }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        tableNode.frame = node.bounds
+        node.addSubnode(tableNode)
         rebuildForm(force: true)
     }
     
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableNode.frame = node.bounds
+    }
+    
     private func tableViewDidLoad() {
-        node.view.tableFooterView = UIView()
+        tableNode.view.tableFooterView = UIView()
     }
     
     open func rebuildForm(force: Bool) {
@@ -63,7 +70,7 @@ open class FormViewController: ASViewController<ASTableNode> {
             }
         }
         if force {
-            node.reloadData()
+            tableNode.reloadData()
         } else {
             let changeSet = StagedChangeset(source: oldSections, target: sections)
             tableNode.reload(using: changeSet, interrupt: nil, setData: { sections in
