@@ -15,6 +15,8 @@ open class FormViewController: ASViewController<ASDisplayNode> {
     public var sections = [Section]()
     public let tableNode: ASTableNode
     
+    public var autoDeselectRow = true
+    
     public init(style: UITableView.Style = .grouped) {
         tableNode = ASTableNode(style: style)
         super.init(node: ASDisplayNode())
@@ -28,6 +30,7 @@ open class FormViewController: ASViewController<ASDisplayNode> {
     }
     
     private func commonInit() {
+        node.addSubnode(tableNode)
         tableNode.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableNode.onDidLoad { [weak self] _ in
             self?.tableViewDidLoad()
@@ -38,8 +41,6 @@ open class FormViewController: ASViewController<ASDisplayNode> {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        tableNode.frame = node.bounds
-        node.addSubnode(tableNode)
         rebuildForm(force: true)
     }
     
@@ -140,7 +141,9 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
     }
     
     public func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        tableNode.deselectRow(at: indexPath, animated: true)
+        if autoDeselectRow {
+            tableNode.deselectRow(at: indexPath, animated: true)
+        }
         let row = sections[indexPath.section].rows[indexPath.row]
         row.onSelected?(row)
     }
