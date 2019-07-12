@@ -55,7 +55,7 @@ open class TextRow: RowCellNode {
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         descriptionNode.style.flexShrink = 1
         textNode.style.flexShrink = 1
-        let flex = ASStackLayoutSpec()
+        let flex = ASLayoutSpec()
         flex.style.flexGrow = 1
         let stack = ASStackLayoutSpec.horizontal()
         stack.alignItems = .center
