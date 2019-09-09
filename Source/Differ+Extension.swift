@@ -66,7 +66,7 @@ extension ASTableNode {
         }
     }
     
-    public func reloadSections<DifferentiableSectionType: DifferentiableSection>(using stagedChangeset: StagedChangeset<[DifferentiableSectionType]>, interrupt: ((Changeset<[DifferentiableSectionType]>) -> Bool)? = nil, setData: ([DifferentiableSectionType]) -> Void, reloadRow: ((ASTableNode, IndexPath) -> Void)? = nil) where DifferentiableSectionType.Collection.Index == Int {
+    func reloadSections<DifferentiableSectionType: DifferentiableSection>(using stagedChangeset: StagedChangeset<[DifferentiableSectionType]>, interrupt: ((Changeset<[DifferentiableSectionType]>) -> Bool)? = nil, setData: ([DifferentiableSectionType]) -> Void, reloadRow: ((ASTableNode, IndexPath) -> Void)? = nil) where DifferentiableSectionType.Collection.Index == Int {
         if case .none = view.window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()

@@ -121,7 +121,6 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
             let view = TitleHeaderView(reuseIdentifier: "titleHeader")
             view.contentView.backgroundColor = tableView.backgroundColor
             view.backgroundColor = tableView.backgroundColor
-            
             headerView = view
         }
         headerView.titleLabel.text = section.title

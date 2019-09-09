@@ -47,10 +47,5 @@ open class OptionsViewController<Option: OptionType>: FormViewController {
     open override func buildForm() -> [Section] {
         return [Section(rows: optionRows)]
     }
-    
-    
-    
-    
-    
 }
 
