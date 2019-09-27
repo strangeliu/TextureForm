@@ -19,6 +19,43 @@ public protocol PresenterRowType {
 
 open class RowCellNode: ASCellNode {
     
+    private var _selectedBackgroundView: UIView?
+        
+    override open var selectedBackgroundView: UIView? {
+        get {
+            if _selectedBackgroundView == nil {
+                _selectedBackgroundView = UIView()
+                _selectedBackgroundView?.backgroundColor = selectedColor
+            }
+            return _selectedBackgroundView
+        }
+        set {
+            _selectedBackgroundView = newValue
+        }
+    }
+    
+    public var selectedColor: UIColor? {
+        didSet {
+            _selectedBackgroundView?.backgroundColor = selectedColor
+        }
+    }
+    
+    override open var backgroundColor: UIColor? {
+        didSet {
+            originBackgroundColor = backgroundColor
+        }
+    }
+    
+    private var originBackgroundColor: UIColor?
+    
+    override open var isHighlighted: Bool {
+        didSet {
+            if #available(iOS 13.0, *) {
+                backgroundColor = isHighlighted ? .clear : originBackgroundColor
+            }
+        }
+    }
+    
     let tag: String
     
     public var editActions: [UITableViewRowAction]?
