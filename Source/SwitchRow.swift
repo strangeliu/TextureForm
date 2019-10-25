@@ -32,8 +32,8 @@ open class SwitchRow: RowCellNode {
         }
     }
     
-    public init(title: String) {
-        super.init()
+    public init(tag: String, title: String) {
+        super.init(tag: tag)
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         selectionStyle = .none
         textNode.style.flexShrink = 1
