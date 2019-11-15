@@ -153,7 +153,7 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
     }
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return sections[indexPath].editActions
+        return sections[indexPath].editActions?.map({ $0.rowAction })
     }
     
 }

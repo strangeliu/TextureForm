@@ -17,6 +17,61 @@ public protocol PresenterRowType {
     var formViewController: FormViewController? { get set }
 }
 
+open class ContextualAction: NSObject {
+
+    open var style: ContextualAction.Style
+
+    open var handler: ContextualAction.Handler
+
+    
+    open var title: String?
+
+    open var backgroundColor: UIColor?
+
+    open var image: UIImage?
+    
+    public init(style: ContextualAction.Style, title: String?, handler: @escaping ContextualAction.Handler) {
+        self.style = style
+        self.title = title
+        self.handler = handler
+    }
+}
+
+extension ContextualAction {
+    
+    public typealias Handler = (ContextualAction, IndexPath, UIView?, ((Bool) -> Void)?) -> Void
+
+    public enum Style : Int {
+
+        case normal
+        case destructive
+    }
+}
+
+extension ContextualAction {
+    
+    var rowAction: UITableViewRowAction {
+        let handler = self.handler
+        return UITableViewRowAction(style: style.rowStyle, title: title) { [weak self] (rowAction, indexPath) in
+            if let self = self {
+                handler(self, indexPath, nil, nil)
+            }
+        }
+    }
+}
+
+extension ContextualAction.Style {
+    
+    var rowStyle: UITableViewRowAction.Style {
+        switch self {
+        case .normal:
+            return .normal
+        case .destructive:
+            return .destructive
+        }
+    }
+}
+
 open class RowCellNode: ASCellNode {
     
     private var _selectedBackgroundView: UIView?
@@ -58,7 +113,7 @@ open class RowCellNode: ASCellNode {
     
     let tag: String
     
-    public var editActions: [UITableViewRowAction]?
+    public var editActions: [ContextualAction]?
     
     public var onSelected: ((Row) -> Void)?
     
