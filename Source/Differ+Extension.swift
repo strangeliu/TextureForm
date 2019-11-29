@@ -12,7 +12,7 @@ import DifferenceKit
 
 extension ASTableNode {
     
-    public func reload<Model>(using stagedChangeset: StagedChangeset<[Model]>, interrupt: ((Changeset<[Model]>) -> Bool)? = nil, setData: ([Model]) -> Void, reloadRow: ((ASTableNode, IndexPath, Model) -> Void)? = nil) {
+    public func reloadData<Model>(using stagedChangeset: StagedChangeset<[Model]>, interrupt: ((Changeset<[Model]>) -> Bool)? = nil, setData: ([Model]) -> Void, reloadRow: ((ASTableNode, IndexPath, Model) -> Void)? = nil) {
         if case .none = view.window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()
@@ -66,7 +66,7 @@ extension ASTableNode {
         }
     }
     
-    func reloadSections<DifferentiableSectionType: DifferentiableSection>(using stagedChangeset: StagedChangeset<[DifferentiableSectionType]>, interrupt: ((Changeset<[DifferentiableSectionType]>) -> Bool)? = nil, setData: ([DifferentiableSectionType]) -> Void, reloadRow: ((ASTableNode, IndexPath) -> Void)? = nil) where DifferentiableSectionType.Collection.Index == Int {
+    func reloadSectionData<DifferentiableSectionType: DifferentiableSection>(using stagedChangeset: StagedChangeset<[DifferentiableSectionType]>, interrupt: ((Changeset<[DifferentiableSectionType]>) -> Bool)? = nil, setData: ([DifferentiableSectionType]) -> Void, reloadRow: ((ASTableNode, IndexPath) -> Void)? = nil) where DifferentiableSectionType.Collection.Index == Int {
         if case .none = view.window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()

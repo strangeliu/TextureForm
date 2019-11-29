@@ -74,7 +74,7 @@ open class FormViewController: ASViewController<ASDisplayNode> {
             tableNode.reloadData()
         } else {
             let changeSet = StagedChangeset(source: oldSections, target: sections)
-            tableNode.reload(using: changeSet, interrupt: nil, setData: { [weak self] sections in
+            tableNode.reloadData(using: changeSet, interrupt: nil, setData: { [weak self] sections in
                 self?.sections = sections
             }, reloadRow: nil)
         }
