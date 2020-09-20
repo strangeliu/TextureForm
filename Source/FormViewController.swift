@@ -10,7 +10,7 @@ import Foundation
 import AsyncDisplayKit
 import DifferenceKit
 
-open class FormViewController: ASViewController<ASDisplayNode> {
+open class FormViewController: ASDKViewController<ASDisplayNode> {
     
     public var sections = [Section]()
     public let tableNode: ASTableNode
@@ -89,8 +89,14 @@ open class FormViewController: ASViewController<ASDisplayNode> {
 extension FormViewController: ASTableDelegate, ASTableDataSource {
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard tableView.style == .grouped else {
-            return nil
+        if #available(iOS 13.0, *) {
+            guard tableView.style == .grouped || tableView.style == .insetGrouped else {
+                return nil
+            }
+        } else {
+            guard tableView.style == .grouped else {
+                return nil
+            }
         }
         let section = sections[section]
         return section.title

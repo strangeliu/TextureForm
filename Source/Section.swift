@@ -60,7 +60,7 @@ extension Section: Collection {
 
 extension Section: DifferentiableSection {
     
-    public init<C>(source: Section, elements: C) where C : Collection, C.Element == Row {
+    public init<C>(source: Section, elements: C) where C: Swift.Collection, C.Element == Row {
         self.init(model: source.tag, elements: Array(elements))
     }
     
