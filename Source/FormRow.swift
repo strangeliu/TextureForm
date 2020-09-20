@@ -96,17 +96,35 @@ open class RowCellNode: ASCellNode {
     }
     
     override open var backgroundColor: UIColor? {
-        didSet {
-            originBackgroundColor = backgroundColor
+        get {
+            return super.backgroundColor
+        }
+        set {
+            super.backgroundColor = newValue
+            if ignoreSetBackgroundColor {
+                ignoreSetBackgroundColor = false
+            } else {
+                restoreBackgroundColor = newValue
+            }
         }
     }
     
-    private var originBackgroundColor: UIColor?
+    private lazy var restoreBackgroundColor = self.backgroundColor
+    
+    private var ignoreSetBackgroundColor = false
     
     override open var isHighlighted: Bool {
-        didSet {
+        get {
+            return super.isHighlighted
+        }
+        set {
+            super.isHighlighted = newValue
             if #available(iOS 13.0, *) {
-                backgroundColor = isHighlighted ? .clear : originBackgroundColor
+                if newValue {
+                    restoreBackgroundColor = backgroundColor
+                }
+                ignoreSetBackgroundColor = true
+                backgroundColor = newValue ? .clear : restoreBackgroundColor
             }
         }
     }
