@@ -67,7 +67,7 @@ open class ActionSheetRow<Option: Equatable & CustomStringConvertible>: RowCellN
         stack.spacing = 15
         stack.children = [textNode, flex, descriptionNode]
         let rightEdge: CGFloat = accessoryType == .none ? 20 : 0
-        let insets = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: rightEdge)
+        let insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: rightEdge)
         return ASInsetLayoutSpec(insets: insets, child: stack)
     }
     

@@ -124,18 +124,24 @@ open class RowCellNode: ASCellNode {
                     restoreBackgroundColor = backgroundColor
                 }
                 ignoreSetBackgroundColor = true
-                backgroundColor = newValue ? .clear : restoreBackgroundColor
+                if newValue {
+                    backgroundColor = .clear
+                } else {
+                    UIView.animate(withDuration: 0.5, delay: 0.15, options: [], animations: {
+                        self.backgroundColor = self.restoreBackgroundColor
+                    })
+                }
             }
         }
     }
     
-    let tag: String
+    let tag: String?
     
     public var editActions: [ContextualAction]?
     
     public var onSelected: ((Row) -> Void)?
     
-    public init(tag: String = UUID().uuidString) {
+    public init(tag: String? = nil) {
         self.tag = tag
         super.init()
         backgroundColor = UIColor.white
@@ -144,8 +150,8 @@ open class RowCellNode: ASCellNode {
 
 extension RowCellNode: Differentiable {
     
-    public var differenceIdentifier: String {
-        return tag
+    public var differenceIdentifier: Int {
+        return tag?.hashValue ?? ObjectIdentifier(self).hashValue
     }
     
     public func isContentEqual(to source: RowCellNode) -> Bool {

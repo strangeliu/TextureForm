@@ -73,7 +73,7 @@ open class SwitchRow: RowCellNode {
         mainStack.spacing = 10
         mainStack.children = [textNode, flex, switchNode]
         
-        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 20), child: mainStack)
+        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 20), child: mainStack)
     }
     
     

@@ -31,7 +31,6 @@ open class FormViewController: ASDKViewController<ASDisplayNode> {
     
     private func commonInit() {
         node.addSubnode(tableNode)
-        tableNode.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableNode.onDidLoad { [weak self] _ in
             self?.tableViewDidLoad()
         }
@@ -41,6 +40,7 @@ open class FormViewController: ASDKViewController<ASDisplayNode> {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        tableNode.frame = node.bounds
         rebuildForm(force: true)
     }
     
@@ -111,7 +111,7 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
                 return section.headerHeight ?? 44
             }
         } else {
-            return section.headerHeight ?? 44
+            return section.headerHeight ?? (section.title == nil ? 0 : 44)
         }
     }
     
@@ -162,4 +162,7 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
         return sections[indexPath].editActions?.map({ $0.rowAction })
     }
     
+    public func tableNode(_ tableNode: ASTableNode, constrainedSizeForRowAt indexPath: IndexPath) -> ASSizeRange {
+        return ASSizeRange(min: CGSize(width: tableNode.bounds.width, height: 0), max: CGSize(width: tableNode.bounds.width, height: CGFloat.greatestFiniteMagnitude / 2))
+    }
 }
