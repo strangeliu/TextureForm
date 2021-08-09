@@ -17,6 +17,7 @@ public protocol PresenterRowType {
     var formViewController: FormViewController? { get set }
 }
 
+@objc(FormContextualAction)
 open class ContextualAction: NSObject {
 
     open var style: ContextualAction.Style
