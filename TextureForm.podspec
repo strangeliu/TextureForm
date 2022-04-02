@@ -7,7 +7,8 @@ Pod::Spec.new do |spec|
   spec.authors      = { 'strangeliu' => 'strangeliu@gmail.com' }
   spec.summary      = 'Form for ASDK'
 
-  spec.ios.deployment_target = '9.0'
+  spec.ios.deployment_target = '11.0'
+  spec.tvos.deployment_target = '11.0'
 
   spec.public_header_files  = 'Source/*.h'
   spec.source_files = 'Source/*.{h,m,swift}'

@@ -53,7 +53,7 @@ open class FormViewController: ASDKViewController<ASDisplayNode> {
         tableNode.view.tableFooterView = UIView()
     }
     
-    open func rebuildForm(force: Bool) {
+    open func rebuildForm(force: Bool = false) {
         reload(to: buildForm(), force: force)
     }
     
@@ -89,7 +89,12 @@ open class FormViewController: ASDKViewController<ASDisplayNode> {
 extension FormViewController: ASTableDelegate, ASTableDataSource {
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if #available(iOS 13.0, *) {
+#if os(tvOS)
+        guard tableView.style == .grouped else {
+            return nil
+        }
+#else
+        if #available(iOS 13.0, tvOS 13.0, *) {
             guard tableView.style == .grouped || tableView.style == .insetGrouped else {
                 return nil
             }
@@ -98,21 +103,14 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
                 return nil
             }
         }
+#endif
         let section = sections[section]
         return section.title
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let section = sections[section]
-        if tableView.style == .plain {
-            if section.title == nil {
-                return 0
-            } else {
-                return section.headerHeight ?? 44
-            }
-        } else {
-            return section.headerHeight ?? (section.title == nil ? 0 : 44)
-        }
+        return section.headerHeight ?? (section.title == nil ? 0 : 44)
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -129,7 +127,7 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
             view.backgroundColor = tableView.backgroundColor
             headerView = view
         }
-        headerView.titleLabel.text = section.title
+        headerView.titleLabel.text = section.title ?? " "
         return headerView
     }
     
@@ -158,9 +156,25 @@ extension FormViewController: ASTableDelegate, ASTableDataSource {
         return row.editActions != nil && row.editActions?.count != 0
     }
     
+#if os(tvOS)
+    
+    public func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    public func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
+        return true
+    }
+    
+#else
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return sections[indexPath].editActions?.map({ $0.rowAction })
     }
+#endif
     
     public func tableNode(_ tableNode: ASTableNode, constrainedSizeForRowAt indexPath: IndexPath) -> ASSizeRange {
         return ASSizeRange(min: CGSize(width: tableNode.bounds.width, height: 0), max: CGSize(width: tableNode.bounds.width, height: CGFloat.greatestFiniteMagnitude / 2))

@@ -9,6 +9,8 @@
 import Foundation
 import AsyncDisplayKit
 
+#if os(tvOS)
+#else
 open class SwitchRow: RowCellNode {
     
     public let textNode = ASTextNode()
@@ -32,7 +34,7 @@ open class SwitchRow: RowCellNode {
         }
     }
     
-    public init(tag: String, title: String) {
+    public init(tag: String? = nil, title: String) {
         super.init(tag: tag)
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         selectionStyle = .none
@@ -78,3 +80,5 @@ open class SwitchRow: RowCellNode {
     
     
 }
+
+#endif

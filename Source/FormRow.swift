@@ -49,6 +49,8 @@ extension ContextualAction {
     }
 }
 
+#if os(tvOS)
+#else
 extension ContextualAction {
     
     var rowAction: UITableViewRowAction {
@@ -72,6 +74,7 @@ extension ContextualAction.Style {
         }
     }
 }
+#endif
 
 open class RowCellNode: ASCellNode {
     
@@ -120,7 +123,7 @@ open class RowCellNode: ASCellNode {
         }
         set {
             super.isHighlighted = newValue
-            if #available(iOS 13.0, *) {
+            if #available(iOS 13.0, tvOS 13.0, *) {
                 if newValue {
                     restoreBackgroundColor = backgroundColor
                 }
